@@ -9,51 +9,67 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. LÓGICA DEL CARRUSEL (Solo si existe en la página) ---
-    const track = document.getElementById('track');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnNext = document.getElementById('btn-next');
-    
-    if (track && btnPrev && btnNext) {
-        let currentIndex = 0;
+// --- LÓGICA DEL CARRUSEL 3D INFINITO (Basado en App.js) ---
+const track = document.getElementById('track');
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+const cards = document.querySelectorAll('.carousel-card');
 
-        function updateCarousel() {
-            const cardWidth = document.querySelector('.carousel-card').offsetWidth;
-            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-        }
+if (track && btnPrev && btnNext && cards.length > 0) {
+    let carouselIndex = 0;
+    const total = cards.length;
 
-        btnNext.addEventListener('click', () => {
-            const cards = document.querySelectorAll('.carousel-card');
-            const cardWidth = cards[0].offsetWidth;
-            const containerWidth = document.querySelector('.carousel-wrapper').offsetWidth;
-            const cardsPerView = Math.round(containerWidth / cardWidth);
-            const maxIndex = cards.length - cardsPerView;
+    // Función que calcula la posición 3D de cada tarjeta
+    const updateCarouselTransforms = () => {
+        cards.forEach((card, idx) => {
+            // Calculamos la distancia de cada tarjeta respecto a la actual
+            let offset = idx - carouselIndex;
+            
+            // Lógica para que sea INFINITO (circular)
+            if (offset > total / 2) offset -= total;
+            if (offset < -total / 2) offset += total;
 
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-                updateCarousel();
+            const absOffset = Math.abs(offset);
+
+            // Valores de transformación 3D
+            const translateX = offset * 180; // Separación horizontal (px)
+            const translateZ = -absOffset * 150; // Qué tan atrás se van (px)
+            const rotateY = offset * -10; // Ángulo de giro (grados)
+            const scale = Math.max(0.6, 1 - absOffset * 0.1); // Las del fondo son más pequeñas
+            const opacity = Math.max(0.3, 1 - absOffset * 0.3); // Las del fondo son más transparentes
+
+            // Aplicamos la transformación matemática
+            card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+            card.style.opacity = opacity.toString();
+            
+            // Calculamos el z-index (la del medio debe estar arriba)
+            card.style.zIndex = String(100 - absOffset * 10);
+            
+            // Ponemos/quitamos la clase activa para el brillo
+            if (offset === 0) {
+                card.classList.add('active-card');
+                card.style.pointerEvents = 'auto'; // Solo puedes clickear la del centro
+            } else {
+                card.classList.remove('active-card');
+                card.style.pointerEvents = 'none'; // Desactiva clicks en tarjetas traseras
             }
         });
+    };
 
-        btnPrev.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
+    // Función para mover el carrusel
+    const moveCarousel = (direction) => {
+        // Sumamos la dirección y mantenemos el índice dentro del total (Loop)
+        carouselIndex = (carouselIndex + direction + total) % total;
+        updateCarouselTransforms();
+    };
 
-        window.addEventListener('resize', () => {
-            const cards = document.querySelectorAll('.carousel-card');
-            if(cards.length > 0){
-                const cardWidth = cards[0].offsetWidth;
-                const containerWidth = document.querySelector('.carousel-wrapper').offsetWidth;
-                const cardsPerView = Math.round(containerWidth / cardWidth);
-                const maxIndex = Math.max(0, cards.length - cardsPerView);
-                if (currentIndex > maxIndex) currentIndex = maxIndex;
-                updateCarousel();
-            }
-        });
-    }
+    // Listeners de los botones
+    btnNext.addEventListener('click', () => moveCarousel(1));
+    btnPrev.addEventListener('click', () => moveCarousel(-1));
+
+    // Inicializamos al cargar
+    updateCarouselTransforms();
+}
 
     // --- 3. FORMULARIO CONTACTO ---
     const form = document.getElementById('subscribeForm');
