@@ -10,10 +10,44 @@
 
 /* --- ESTILOS GENERALES --- */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Baloo 2', display; }
-body { 
-    background-color: var(--bg-deep-purple); color: var(--text-light); 
-    line-height: 1.4; overflow-x: hidden; 
-    display: flex; flex-direction: column; min-height: 100vh; 
+/* --- ESTILOS ACTUALIZADOS PARA EL CUERPO DE LA PÁGINA --- */
+body {
+    /* Mantenemos el color de fondo oscuro base */
+    background-color: var(--bg-deep-purple);
+    color: var(--text-light);
+    line-height: 1.4;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Baloo 2', cursive; /* Asegura que la fuente cargue correctamente */
+
+    /* --- IMPLEMENTACIÓN DEL FONDO CON BAJA OPACIDAD --- */
+    /* Usamos un pseudo-elemento para controlar la opacidad de la imagen por separado del texto */
+    position: relative; /* Necesario para posicionar el pseudo-elemento */
+}
+
+/* Creamos una capa de fondo con el patrón */
+body::before {
+    content: ""; /* Obligatorio para que el pseudo-elemento exista */
+    position: fixed; /* Mantiene el fondo fijo mientras haces scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Coloca esta capa detrás de todo el contenido */
+
+    /* Ruta a tu imagen de patrón */
+    background-image: url('assets/back.jpeg'); /* Reemplaza con tu ruta real */
+    background-repeat: repeat; /* El patrón se repite para cubrir todo */
+    background-position: center;
+    background-size: auto; /* Mantenemos el tamaño original del patrón */
+
+    /* --- EL CAMBIO CLAVE: BAJA OPACIDAD --- */
+    opacity: 0.05; /* Un 5% de opacidad para una textura súper sutil */
+
+    /* Alternativa con difuminado (opcional, si prefieres un look más suave)
+    filter: blur(2px); /* Descomenta esta línea para difuminar el patrón */
 }
 main { flex: 1; padding-top: 80px; } /* Compensa el header fijo */
 a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -100,3 +134,17 @@ footer { background-color: #0b0512; text-align: center; padding: 30px; font-size
     margin: 0 auto;
     padding: 20px 0;
 }
+/* --- ESTILOS PARA IMÁGENES DE PRODUCTOS Y PLANES --- */
+/* --- ESTILOS CORREGIDOS PARA IMÁGENES DE PRODUCTOS --- */
+.product-image {
+    width: 100%; /* Sigue ocupando todo el ancho disponible */
+    height: 200px; /* Mantenemos la altura para que todas las tarjetas sean iguales */
+    
+    /* ¡ESTE ES EL CAMBIO CLAVE! */
+    object-fit: contain; /* <- Escala la imagen para que quepa ENTERA dentro del contenedor */
+    
+    background-color: transparent; /* Asegura que el fondo del contenedor no interfiera */
+    border-radius: 15px; /* Mantenemos los bordes redondeados */
+    margin-bottom: 15px; /* Espacio debajo de la imagen */
+}
+
