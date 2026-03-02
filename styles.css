@@ -38,7 +38,7 @@ body::before {
     z-index: -1; /* Coloca esta capa detrás de todo el contenido */
 
     /* Ruta a tu imagen de patrón */
-    background-image: url('assets/back.jpeg'); /* Reemplaza con tu ruta real */
+    background-image: url('assets/back.webp'); /* Reemplaza con tu ruta real */
     background-repeat: repeat; /* El patrón se repite para cubrir todo */
     background-position: center;
     background-size: auto; /* Mantenemos el tamaño original del patrón */
