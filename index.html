@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel & Plush | Tu Tienda Aesthetic de Peluches y CyberGaming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Pequeños ajustes específicos para que la Landing Page brille */
+        .hero { padding: 120px 10% 80px 10%; }
+        .contact-section { background: linear-gradient(180deg, var(--bg-deep-purple) 0%, #12091e 100%); }
+        .newsletter input { width: 100%; max-width: 400px; padding: 15px; border-radius: 50px; border: 2px solid var(--soft-lila); background: rgba(255,255,255,0.05); color: white; margin-bottom: 20px;}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Pixel & Plush</div>
+        <nav>
+            <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
+            <ul id="nav-list">
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="nosotros.html">Qué Hacemos</a></li>
+                <li><a href="tienda.html">Peluches</a></li>
+                <li><a href="cyber.html">CyberZone</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Abraza tu pasión Gamer en Pixel & Plush</h1>
+            <p>Tu tienda aesthetic online donde la ternura de los peluches Pokémon se une a la intensidad del CyberGaming. ¡Colecciona, juega y triunfa!</p>
+            <br>
+            <a href="#carrusel-peluches" class="btn">Explorar Tienda</a>
+        </section>
+
+        <section class="section-container">
+            <div class="about-box">
+                <h2 class="section-title">Nuestra Propuesta de Valor</h2>
+                <p>Somos el primer espacio 100% online diseñado para el gamer que no quiere elegir entre suavidad y rendimiento. Te ofrecemos peluches Pokémon premium y acceso exclusivo a servicios CyberGamer.</p>
+                <br>
+                <a href="nosotros.html" class="btn" style="background-color: transparent; border: 2px solid var(--soft-lila); color: var(--soft-lila);">Leer más sobre nosotros</a>
+            </div>
+        </section>
+
+        <section class="section-container" id="carrusel-peluches">
+            <h2 class="section-title">Nuestros Peluches Estrella</h2>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" id="btn-prev">❮</button>
+                <div class="carousel-track" id="track">
+                    <div class="carousel-card"><div class="card"><div class="product-image-placeholder">Pikachu</div><h3>Pikachu 30cm</h3><div class="price">$25.00</div><button class="btn">Comprar</button></div></div>
+                    <div class="carousel-card"><div class="card"><div class="product-image-placeholder">Gengar</div><h3>Gengar 45cm</h3><div class="price">$35.00</div><button class="btn">Comprar</button></div></div>
+                    <div class="carousel-card"><div class="card"><div class="product-image-placeholder">Snorlax</div><h3>Snorlax 60cm</h3><div class="price">$55.00</div><button class="btn">Comprar</button></div></div>
+                    <div class="carousel-card"><div class="card"><div class="product-image-placeholder">Eevee</div><h3>Eevee 30cm</h3><div class="price">$25.00</div><button class="btn">Comprar</button></div></div>
+                    <div class="carousel-card"><div class="card"><div class="product-image-placeholder">Charmander</div><h3>Charmander</h3><div class="price">$30.00</div><button class="btn">Comprar</button></div></div>
+                    <div class="carousel-card"><div class="card"><div class="product-image-placeholder">Squirtle</div><h3>Squirtle 35cm</h3><div class="price">$30.00</div><button class="btn">Comprar</button></div></div>
+                </div>
+                <button class="carousel-btn next" id="btn-next">❯</button>
+            </div>
+            <br><br>
+            <a href="tienda.html" class="btn" style="background-color: transparent; border: 2px solid var(--soft-lila); color: var(--soft-lila);">Ver Catálogo Completo</a>
+        </section>
+
+        <section class="section-container">
+            <h2 class="section-title">CyberGamer Zone</h2>
+            <div class="grid-cyber">
+                <div class="card cyber-card">
+                    <div class="product-image-placeholder">Pase Diario</div>
+                    <h3>Pase Diario VIP</h3>
+                    <div class="price">$5.00</div>
+                    <button class="btn">Adquirir Pase</button>
+                </div>
+                <div class="card cyber-card">
+                    <div class="product-image-placeholder">Suscripción</div>
+                    <h3>Suscripción Pro</h3>
+                    <div class="price">$15.00/mes</div>
+                    <button class="btn">Suscribirse</button>
+                </div>
+            </div>
+            <br><br>
+            <a href="cyber.html" class="btn" style="background-color: transparent; border: 2px solid var(--soft-lila); color: var(--soft-lila);">Ver todos los beneficios</a>
+        </section>
+
+        <section class="section-container contact-section">
+            <h2 class="section-title">¡Únete a la Familia!</h2>
+            <div class="newsletter">
+                <form id="subscribeForm">
+                    <input type="email" id="emailInput" placeholder="Tu correo aesthetic..." required>
+                    <br>
+                    <button type="submit" class="btn">Suscribirme</button>
+                </form>
+            </div>
+            <br><br>
+            <a href="https://wa.me/5211234567890?text=Hola%20Pixel%20%26%20Plush!" target="_blank" class="btn btn-whatsapp">💬 Escríbenos por WhatsApp</a>
+        </section>
+    </main>
+
+    <footer><p>&copy; 2026 Pixel & Plush. Tienda Online.</p></footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
