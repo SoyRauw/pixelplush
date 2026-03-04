@@ -9,7 +9,13 @@
 }
 
 /* --- ESTILOS GENERALES --- */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Baloo 2', display; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Baloo 2', display;
+}
+
 /* --- ESTILOS ACTUALIZADOS PARA EL CUERPO DE LA PÁGINA --- */
 body {
     /* Mantenemos el color de fondo oscuro base */
@@ -20,116 +26,280 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'Baloo 2', cursive; /* Asegura que la fuente cargue correctamente */
+    font-family: 'Baloo 2', cursive;
+    /* Asegura que la fuente cargue correctamente */
 
-    /* --- IMPLEMENTACIÓN DEL FONDO CON BAJA OPACIDAD --- */
-    /* Usamos un pseudo-elemento para controlar la opacidad de la imagen por separado del texto */
-    position: relative; /* Necesario para posicionar el pseudo-elemento */
 }
 
-/* Creamos una capa de fondo con el patrón */
-body::before {
-    content: ""; /* Obligatorio para que el pseudo-elemento exista */
-    position: fixed; /* Mantiene el fondo fijo mientras haces scroll */
+/* --- ZONAS CON FONDO DIFUMINADO --- */
+.pokemon-zone {
+    position: relative;
+    padding-top: 80px;
+    /* Compensa el header fijo */
+}
+
+.cyber-zone {
+    position: relative;
+    overflow: hidden;
+    /* Evita que el blur se desborde */
+}
+
+/* Fondo difuminado de la zona Pokemon (hero hasta carrusel) */
+.pokemon-zone::before {
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Coloca esta capa detrás de todo el contenido */
-
-    /* Ruta a tu imagen de patrón */
-    background-image: url('assets/back.webp'); /* Reemplaza con tu ruta real */
-    background-repeat: repeat; /* El patrón se repite para cubrir todo */
+    z-index: -1;
+    background-image: url('assets/background.webp');
+    background-repeat: no-repeat;
     background-position: center;
-    background-size: auto; /* Mantenemos el tamaño original del patrón */
-
-    /* --- EL CAMBIO CLAVE: BAJA OPACIDAD --- */
-    opacity: 0.05; /* Un 5% de opacidad para una textura súper sutil */
-
-    /* Alternativa con difuminado (opcional, si prefieres un look más suave)
-    filter: blur(2px); /* Descomenta esta línea para difuminar el patrón */
+    background-size: cover;
+    filter: blur(6px);
+    opacity: 0.18;
 }
-main { flex: 1; padding-top: 80px; } /* Compensa el header fijo */
-a { text-decoration: none; color: inherit; transition: 0.3s; }
-ul { list-style: none; }
+
+/* Fondo difuminado de la zona Cyber */
+.cyber-zone::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('assets/cyberback.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: blur(6px);
+    opacity: 0.18;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
 
 /* --- NAVEGACIÓN --- */
 header {
-    background: var(--glass); backdrop-filter: blur(15px); padding: 10px 5%;
-    position: fixed; width: 100%; top: 0; z-index: 1000;
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    padding: 10px 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.logo { font-size: 1.8rem; font-weight: 800; color: var(--soft-lila); text-shadow: 0 0 10px rgba(213, 189, 236, 0.5); }
-nav ul { display: flex; gap: 1.5rem; }
-nav a { font-weight: 700; font-size: 1.1rem; }
-nav a:hover, nav a.active { color: var(--soft-lila); text-shadow: 0 0 5px var(--soft-lila); }
 
-.menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
-.menu-toggle span { width: 25px; height: 3px; background-color: var(--text-light); transition: 0.3s; }
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--soft-lila);
+    text-shadow: 0 0 10px rgba(213, 189, 236, 0.5);
+}
+
+nav ul {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--soft-lila);
+    text-shadow: 0 0 5px var(--soft-lila);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-light);
+    transition: 0.3s;
+}
 
 /* --- BOTONES --- */
 .btn {
-    display: inline-block; background-color: var(--soft-lila); color: var(--bg-deep-purple);
-    padding: 12px 30px; border-radius: 50px; font-weight: 800; font-size: 1.2rem;
-    box-shadow: 0 5px 15px rgba(213, 189, 236, 0.4); border: 2px solid transparent; cursor: pointer; transition: all 0.3s;
+    display: inline-block;
+    background-color: var(--soft-lila);
+    color: var(--bg-deep-purple);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(213, 189, 236, 0.4);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-.btn:hover { background-color: var(--mid-purple); color: var(--text-light); box-shadow: 0 8px 25px rgba(104, 63, 181, 0.6); border-color: var(--soft-lila); transform: scale(1.05); }
-.btn-whatsapp { background-color: #25D366; color: white; margin-top: 20px;}
-.btn-whatsapp:hover { background-color: #128C7E; color: white; border-color: white;}
+
+.btn:hover {
+    background-color: var(--mid-purple);
+    color: var(--text-light);
+    box-shadow: 0 8px 25px rgba(104, 63, 181, 0.6);
+    border-color: var(--soft-lila);
+    transform: scale(1.05);
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    margin-top: 20px;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+    color: white;
+    border-color: white;
+}
 
 /* --- FOOTER --- */
-footer { background-color: #0b0512; text-align: center; padding: 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+footer {
+    background-color: #0b0512;
+    text-align: center;
+    padding: 30px;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
 
 /* --- CLASES COMPARTIDAS (Tarjetas, Secciones) --- */
-.section-container { padding: 60px 10%; text-align: center; }
-.section-title { font-size: 2.8rem; color: var(--soft-lila); margin-bottom: 30px; }
+.section-container {
+    padding: 60px 10%;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    color: var(--soft-lila);
+    margin-bottom: 30px;
+}
+
 .card {
-    background-color: #24163d; padding: 20px; border-radius: 25px; text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2); border: 1px solid transparent; transition: all 0.3s ease-in-out;
-    height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+    background-color: #24163d;
+    padding: 20px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.card:hover { transform: translateY(-10px); border-color: rgba(213, 189, 236, 0.3); box-shadow: 0 12px 30px rgba(104, 63, 181, 0.4); }
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(213, 189, 236, 0.3);
+    box-shadow: 0 12px 30px rgba(104, 63, 181, 0.4);
+}
+
 .product-image-placeholder {
-    width: 100%; height: 200px; background-color: #31204a; border-radius: 15px; margin-bottom: 15px;
-    display: flex; justify-content: center; align-items: center; color: var(--accent-glow);
-    font-size: 0.9rem; font-weight: bold; border: 2px dashed rgba(213, 189, 236, 0.2); text-align: center; padding: 10px;
-}
-.price { font-size: 1.8rem; font-weight: 800; color: var(--soft-lila); margin: 10px 0; }
-
-/* --- COMPONENTES ESPECÍFICOS --- */
-.hero { padding: 100px 10%; text-align: center; position: relative; }
-.hero h1 { font-size: 3.5rem; line-height: 1.1; color: var(--soft-lila); margin-bottom: 20px; }
-.about-box { background: var(--glass); border-radius: 30px; padding: 50px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); margin: 0 auto; max-width: 900px; }
-
-/* Carrusel */
-/* --- 1. CONTENEDOR PRINCIPAL --- */
-.carousel-wrapper { 
-    position: relative; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    overflow: hidden; 
-    padding: 20px 0; 
-}
-
-/* --- 2. PISTA (TRACK) EN 3D --- */
-.carousel-track { 
-    position: relative;
     width: 100%;
-    height: 450px; /* Altura fija necesaria para las tarjetas absolutas */
+    height: 200px;
+    background-color: #31204a;
+    border-radius: 15px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 1000px; /* Crea el efecto de profundidad */
+    color: var(--accent-glow);
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px dashed rgba(213, 189, 236, 0.2);
+    text-align: center;
+    padding: 10px;
+}
+
+.price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--soft-lila);
+    margin: 10px 0;
+}
+
+/* --- COMPONENTES ESPECÍFICOS --- */
+.hero {
+    padding: 100px 10%;
+    text-align: center;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: var(--soft-lila);
+    margin-bottom: 20px;
+}
+
+.about-box {
+    background: var(--glass);
+    border-radius: 30px;
+    padding: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+/* Carrusel */
+/* --- 1. CONTENEDOR PRINCIPAL --- */
+.carousel-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* --- 2. PISTA (TRACK) EN 3D --- */
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    /* Altura fija necesaria para las tarjetas absolutas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    /* Crea el efecto de profundidad */
     transform-style: preserve-3d;
 }
 
 /* --- 3. TARJETAS APILADAS EN EL CENTRO --- */
-.carousel-card { 
-    position: absolute; /* Reemplaza el 'min-width: calc(100% / 3)' */
-    width: 280px; /* El ancho real de tu tarjeta */
+.carousel-card {
+    position: absolute;
+    /* Reemplaza el 'min-width: calc(100% / 3)' */
+    width: 280px;
+    /* El ancho real de tu tarjeta */
     transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s ease-out;
-    border-radius: 25px; 
+    border-radius: 25px;
 }
 
 /* El brillo de la tarjeta seleccionada */
@@ -138,49 +308,96 @@ footer { background-color: #0b0512; text-align: center; padding: 30px; font-size
 }
 
 /* --- 4. BOTONES DEL CARRUSEL (Tus estilos originales, adaptados al 3D) --- */
-.carousel-btn { 
-    position: absolute; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    background-color: var(--soft-lila); 
-    color: var(--bg-deep-purple); 
-    border: none; 
-    width: 50px; 
-    height: 50px; 
-    border-radius: 50%; 
-    font-size: 1.5rem; 
-    font-weight: bold; 
-    cursor: pointer; 
-    z-index: 200; /* IMPORTANTE: Lo subimos para que los botones siempre estén sobre las cartas */
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--soft-lila);
+    color: var(--bg-deep-purple);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 200;
+    /* IMPORTANTE: Lo subimos para que los botones siempre estén sobre las cartas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
-.carousel-btn:hover { 
-    background-color: var(--mid-purple); 
-    color: var(--text-light); 
-    transform: translateY(-50%) scale(1.1); 
+.carousel-btn:hover {
+    background-color: var(--mid-purple);
+    color: var(--text-light);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
 
 /* Grids */
-.grid-cyber { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;}
-.cyber-card { border: 2px solid var(--mid-purple); background-color: #12091f; }
-.cyber-card:hover { border-color: var(--soft-lila); }
+.grid-cyber {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cyber-card {
+    border: 2px solid var(--mid-purple);
+    background-color: #12091f;
+}
+
+.cyber-card:hover {
+    border-color: var(--soft-lila);
+}
 
 /* --- RESPONSIVE --- */
-@media (max-width: 900px) { .carousel-card { min-width: calc(100% / 2); } }
-@media (max-width: 600px) {
-    .menu-toggle { display: flex; }
-    nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--bg-deep-purple); padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    nav ul.active { display: flex; }
-    .hero h1 { font-size: 2.2rem; }
-    .carousel-card { min-width: 100%; }
+@media (max-width: 900px) {
+    .carousel-card {
+        min-width: calc(100% / 2);
+    }
 }
+
+@media (max-width: 600px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-deep-purple);
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .carousel-card {
+        min-width: 100%;
+    }
+}
+
 /* --- CUADRÍCULA PARA CATÁLOGOS --- */
 .product-grid {
     display: grid;
@@ -190,38 +407,51 @@ footer { background-color: #0b0512; text-align: center; padding: 30px; font-size
     margin: 0 auto;
     padding: 20px 0;
 }
+
 /* --- ESTILOS PARA IMÁGENES DE PRODUCTOS Y PLANES --- */
 /* --- ESTILOS CORREGIDOS PARA IMÁGENES DE PRODUCTOS --- */
 .product-image {
-    width: 100%; /* Sigue ocupando todo el ancho disponible */
-    height: 200px; /* Mantenemos la altura para que todas las tarjetas sean iguales */
-    
+    width: 100%;
+    /* Sigue ocupando todo el ancho disponible */
+    height: 200px;
+    /* Mantenemos la altura para que todas las tarjetas sean iguales */
+
     /* ¡ESTE ES EL CAMBIO CLAVE! */
-    object-fit: contain; /* <- Escala la imagen para que quepa ENTERA dentro del contenedor */
-    
-    background-color: transparent; /* Asegura que el fondo del contenedor no interfiera */
-    border-radius: 15px; /* Mantenemos los bordes redondeados */
-    margin-bottom: 15px; /* Espacio debajo de la imagen */
+    object-fit: contain;
+    /* <- Escala la imagen para que quepa ENTERA dentro del contenedor */
+
+    background-color: transparent;
+    /* Asegura que el fondo del contenedor no interfiera */
+    border-radius: 15px;
+    /* Mantenemos los bordes redondeados */
+    margin-bottom: 15px;
+    /* Espacio debajo de la imagen */
 }
+
 /* --- ESTILOS ACTUALIZADOS PARA EL RESALTADO REDONDEADO PERFECTO --- */
 .carousel-card {
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    opacity: 0.6; /* Las tarjetas a los lados son más opacas */
-    transform: scale(0.85); /* Las tarjetas a los lados son más pequeñas */
+    opacity: 0.6;
+    /* Las tarjetas a los lados son más opacas */
+    transform: scale(0.85);
+    /* Las tarjetas a los lados son más pequeñas */
     /* Aseguramos que la transición de la sombra también sea suave */
     transition-property: transform, opacity, box-shadow;
 }
 
 /* Esta clase se añade dinámicamente con JavaScript a la tarjeta central */
 .carousel-card.active-card {
-    opacity: 1; /* La tarjeta central es totalmente visible */
-    transform: scale(1); /* La tarjeta central tiene su tamaño normal/más grande */
-    z-index: 10; /* Asegura que la tarjeta central quede por encima */
-    
+    opacity: 1;
+    /* La tarjeta central es totalmente visible */
+    transform: scale(1);
+    /* La tarjeta central tiene su tamaño normal/más grande */
+    z-index: 10;
+    /* Asegura que la tarjeta central quede por encima */
+
     /* --- EL RESALTADO REDONDEADO PERFECTO --- */
     /* El border-radius DEBE coincidir con el de la tarjeta (25px en tu CSS) */
-    border-radius: 25px; 
-    
+    border-radius: 25px;
+
     /* El brillo morado ahora sigue la curva de la tarjeta */
-    box-shadow: 0 0 25px rgba(187, 134, 252, 0.6); 
+    box-shadow: 0 0 25px rgba(187, 134, 252, 0.6);
 }
